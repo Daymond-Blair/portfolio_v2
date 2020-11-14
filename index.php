@@ -1,51 +1,15 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/main.css">
-</head>
-
 <body>
-  <header>
-    <div class="logo">
-      <a href="index.html" class="name">JSM</div>
-    </div>
-    <div class="header-menu">
-      <a href="index.html">Home</a>
-      <a href="index.html#services-section">Services</a>
-      <a href="index.html#portfolio-section">Portfolio</a>
-      <a href="index.html#experience-section">Experience</a>
-      <a href="index.html#blog-section">Blog</a>
-      <a href="index.html#testimonials-section">Testimonials</a>
-    </div>
-    <div class="menu-btn">
-      <i class="fas fa-bars"></i>
-    </div>
-  </header>
-  <div class="mobile-menu">
-    <a href="index.html">Home</a>
-    <a href="index.html#services-section">Services</a>
-    <a href="index.html#portfolio-section">Portfolio</a>
-    <a href="index.html#experience-section">Experience</a>
-    <a href="index.html#blog-section">Blog</a>
-    <a href="index.html#testimonials-section">Testimonials</a>
-  </div>
+  <?php get_header( ); ?>
   <section id="top">
     <div class="container">
       <div class="info">
         <div class="blue-square"></div>
-        <h1>Joe Santos Garcia</h1>
+        <h1>Daymond Blair</h1>
         <p>Web Developer</p>
         <a href="#">Latest Works</a>
       </div>
       <div class="img">
         <div class="background-img">
-
         </div>
       </div>
     </div>
@@ -56,28 +20,30 @@
         <div class="circle"></div>
         <h1>services</h1>
       </div>
+
       <div class="services-container">
-        <div class="box blue">
-          <i class="fas fa-trophy"></i>
-          <h5>Best Quality</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.</p>
+        <?php
+          // Get the pod named service 
+          $myPod = pods('service'); 
+          $myPod->find('name ASC');
+        ?>
+
+        <?php while ($myPod->fetch()) :?>
+        <?php
+          // Set variables
+          $name= $myPod->field('name');
+          $content= $myPod->field('content');
+          $permalink= $myPod->field('permalink');
+          $icon_class= $myPod->field('icon_class');
+          $border_color= $myPod->field('border_color');
+        ?>
+        <div class="box <?php echo $border_color; ?>">
+          <i class="<?php echo $icon_class; ?>"></i>
+          <h5><?php echo $name; ?></h5>
+          <p><?php echo $content; ?></p>
         </div>
-        <div class="box red">
-          <i class="fas fa-plane"></i>
-          <h5>Best Quality</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.</p>
-        </div>
-        <div class="box yellow">
-          <i class="fas fa-money-check-alt"></i>
-          <h5>Best Quality</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.</p>
-        </div>
+        <?php endwhile; ?>
+
       </div>
     </div>
   </section>
@@ -178,24 +144,28 @@
           </div>
         </div>
         <div class="info">
-          <div class="info-box">
-            <h4>Graphic Artist - Nike</h4>
-            <span class="date">June 2012 - July 2013</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. </p>
+        <?php
+          // Get the pod named service 
+          $myPod = pods('experience'); 
+          $myPod->find('start_end_date ASC');
+        ?>
+
+        <?php while ($myPod->fetch()) :?>
+        <?php
+          // Set variables
+          $name= $myPod->field('name');
+          $content= $myPod->field('content');
+          $start_end_date= $myPod->field('start_end_date');
+          $location= $myPod->field('location');
+          $permalink= $myPod->field('permalink');
+        ?>
+        <div class="info-box">
+            <h4><?php echo $name; ?> - <?php echo $location; ?></h4>
+            <span class="date"><?php echo $start_end_date; ?></span>
+            <p><?php echo $content; ?></p>
           </div>
-          <div class="info-box">
-            <h4>Graphic Artist - Nike</h4>
-            <span class="date">June 2012 - July 2013</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. </p>
-          </div>
-          <div class="info-box">
-            <h4>Graphic Artist - Nike</h4>
-            <span class="date">June 2012 - July 2013</span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. </p>
-          </div>
+        <?php endwhile; ?>
+          
         </div>
       </div>
     </div>
@@ -397,28 +367,4 @@
       </div>
     </div>
   </section>
-  <footer>
-    <div class="social-container">
-      <a href="http://www.facebook.com/">
-        <i class="fab fa-facebook"></i>
-      </a>
-      <a href="http://www.dribbble.com/">
-        <i class="fab fa-dribbble"></i>
-      </a>
-      <a href="http://www.facebook.com/">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="http://www.facebook.com/">
-        <i class="fab fa-instagram"></i>
-      </a>
-    </div>
-    <h5>Joe Santos Garcia</h5>
-    <h6>Web Developer</h6>
-  </footer>
-
-  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/app.js"></script>
-
-
-</body>
-
-</html>
+  <?php get_footer(); ?>
